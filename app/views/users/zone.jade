@@ -1,0 +1,49 @@
+!!! 5
+html(lang='en', xmlns='http://www.w3.org/1999/xhtml', xmlns:fb='https://www.facebook.com/2008/fbml', itemscope='itemscope', itemtype='http://schema.org/Product')
+  include ../includes/head
+  body
+    .citycover
+      include ../includes/header
+      .citycover-content.citycover-print
+       .container.container-activate-gap
+        .row
+         div
+          h1.bira-font.page-title Setting up a new Lassy
+        .row.map_section
+         div
+          .bbox
+           div
+             form.map-form(action="/user/route", method="POST")
+              h2.bira-font Time to create your LassyZones
+              span You must create at least 2 LassyZones.
+              input(type="text", name="search-addr", id="search-addr", value="", placeholder="Search address...")
+              input.btn.btn-primary(type="button", id="searchbtn",value="Search") 
+              .map-area(id="googleMap")
+              ul.addr-list
+                li 
+                  span.number 1. 
+                  input(type="text", name="zonename-1", id="zonename-1", value="", placeholder="Name of LassyZone...")
+                  span.zonename-1.hide
+                  input.btn.btn-primary(type="button", id="zonebtn-1",value="Save & Add New")
+                  a.editlink-1.hide Edit Name
+              div
+                input.btn.btn-warning.btn-large(type="submit", value="Next")
+      include ../includes/footer
+
+    
+    script(type='text/javascript', src='/js/jquery.min.js')
+    script(type='text/javascript', src='/js/bootstrap.min.js')
+    script(type='text/javascript', src='/js/bootbox.js')
+    script(type='text/javascript', src='/js/jquery.maskedinput.min.js')
+    script(type='text/javascript', src='http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false')
+    script(type='text/javascript', src='/js/zone.js')
+    script(type="text/javascript")
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-25468002-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();

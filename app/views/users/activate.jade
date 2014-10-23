@@ -1,0 +1,87 @@
+!!! 5
+html(lang='en', xmlns='http://www.w3.org/1999/xhtml', xmlns:fb='https://www.facebook.com/2008/fbml', itemscope='itemscope', itemtype='http://schema.org/Product')
+  include ../includes/head
+  body
+    .citycover
+      include ../includes/header
+      .citycover-content.citycover-print
+       .container.container-activate-gap
+        .row
+         div
+          h1.bira-font.page-title Thanks for signing up!
+        .row
+         div
+          .bbox
+           -if(typeof(error) != "undefined") {
+            .alert.alert-danger
+             p Mobile number not registered.
+           - }
+           .row
+            .span6
+             .tcwrap
+              h2.bira-font Check your text messages...
+              - var phoneText = ''
+              - if(typeof(phone) !== 'undefined') {
+                 p.sprint We sent a text message to #{phone} containing 
+                  | an activation code. Enter it to the right and click <span class="blue">‘ACTIVATE’</span>.
+              - } else {
+                 p.sprint We sent a text message to your phone containing 
+                   | an activation code. Enter it to the right and click <span class="blue">‘ACTIVATE’</span>.
+              - }
+
+            .span4
+             form#activation-form.activation-form.form-search
+              input.input-field(type="hidden", name="mobile", value="#{phone}")
+              input.input-field(type="text", placeholder="Activation Code", name="code")
+              input.btn.activate-btn(type="submit", value="Activate")
+        .row
+         div
+          .bbox
+           .row
+            .span6
+             .tcwrap
+              h2.bira-font Didn’t get your text message?
+              p.sprint Double check your number and have it resent!
+            .span4
+             form.resend-form.form-search(action="/user/resend", method="POST")
+              input.phone(type="text", name="mobile")
+              input.btn.resend-btn(type="submit", value="Resend Confirmation")
+
+      include ../includes/footer
+
+    div#congrats-popup.modal.fade.hide
+     .loader-wrap
+      h6 Sending...
+      img(src="/img/ajax-loader.gif")
+     .alert.alert-danger.alert-congrats(style="margin:10px; display: none;")
+      p There was an error while activating your account. Please try again.
+      a.btn.okay-btn(href="#") Ok
+     .modal-body(style="display: none;")
+      h2.bira-font Congratulations!
+      h3.bira-font You have joined the Lassy Village
+      form#update-form(action="/user/update", method="POST")
+       p Tell us your name so we know what to call you:
+       .alert.alert-danger(style="display: none;")
+        p.alert-text
+       input.input-field(type="hidden", name="mobile", value="#{phone}")
+       input.activation-code(type="hidden", name="code")
+       input(type="text", name="fullname", placeholder="Full Name")
+       input(type="text", name="email", placeholder="Email")
+       p
+        input.btn.resend-btn(type="submit", value="Done")
+    .modal-backdrop.fade.hide
+    script(type='text/javascript', src='/js/jquery.min.js')
+    script(type='text/javascript', src='/js/bootstrap.min.js')
+    script(type='text/javascript', src='/js/bootbox.js')
+    script(type='text/javascript', src='/js/jquery.maskedinput.min.js')
+    script(type='text/javascript', src='/js/activate.js')
+    script(type="text/javascript")
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-25468002-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
